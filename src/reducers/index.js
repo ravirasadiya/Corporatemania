@@ -1,5 +1,12 @@
 import ThemeOptions from './ThemeOptions';
-
-export default {
+import { registration } from './registration.reducer';
+import { combineReducers } from 'redux';
+// export default {
+//     ThemeOptions,
+//     registration
+// };
+const rootReducer = combineReducers({
     ThemeOptions
-};
+  });
+
+export default rootReducer;

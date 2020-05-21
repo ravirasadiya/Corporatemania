@@ -1,5 +1,5 @@
 import React, {Fragment, Component} from "react";
-
+import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
 import bg1 from '../../../assets/utils/images/originals/city.jpg';
@@ -84,7 +84,7 @@ export default class Login extends Component {
                                 </h4>
                                 <h6 className="mt-3">
                                     No account?{' '}
-                                    <a href="#/register" className="text-primary">Sign up now</a>
+                                    <Link to="/register" className="text-primary">Sign up now</Link>
                                 </h6>
                                 <Row className="divider"/>
                                 <div>
@@ -112,8 +112,8 @@ export default class Login extends Component {
                                         <Row className="divider"/>
                                         <div className="d-flex align-items-center">
                                             <div className="ml-auto">
-                                                <a href="#/forgot-password" className="btn-lg btn btn-link">Recover
-                                                    Password</a>{' '}{' '}
+                                                <Link to="/forgot-password" className="btn-lg btn btn-link">Recover
+                                                    Password</Link>{' '}{' '}
                                                 <Button color="primary" size="lg">Login to Dashboard</Button>
                                             </div>
                                         </div>

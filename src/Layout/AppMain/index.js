@@ -1,14 +1,28 @@
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
-import React, {Suspense, lazy, Fragment} from 'react';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import React, {Suspense, lazy, Fragment, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { PrivateRoute } from '../../components';
+import { history } from '../../helpers';
 import Loader from 'react-loaders'
 
 import {
     ToastContainer,
 } from 'react-toastify';
+import Login from '../../DemoPages/UserPages/Login';
+import Register from '../../DemoPages/UserPages/Register';
+import ForgotPassword from '../../DemoPages/UserPages/ForgotPassword';
+import CRMDashboard from '../../DemoPages/Dashboards/CRM';
 
 const UserPages = lazy(() => import('../../DemoPages/UserPages'));
 
 const AppMain = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        history.listen((location, action) => {
+            // clear alert on location change
+            // dispatch(alertActions.clear());
+        });
+    }, []);
 
     return (
         <Fragment>
@@ -27,7 +41,16 @@ const AppMain = () => {
                     </div>
                 </div>
             }>
-                <Route path="/" component={UserPages}/>
+                {/* <Route path="/" component={UserPages}/> */}
+                <Router>
+                        <Switch>
+                            <PrivateRoute exact path="/" component={CRMDashboard} />
+                            <Route path="/login" component={Login} />
+                            <Route path="/register" component={Register} />
+                            <Route path="/forgot-password" component={ForgotPassword} />
+                            <Redirect from="*" to="/login" />
+                        </Switch>
+                    </Router>
             </Suspense>
 
             {/* <Route exact path="/" render={() => (

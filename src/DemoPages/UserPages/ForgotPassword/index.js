@@ -1,5 +1,5 @@
 import React, {Fragment, Component} from "react";
-
+import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 
 import bg1 from '../../../assets/utils/images/originals/city.jpg';
@@ -95,7 +95,7 @@ export default class ForgotPassword extends Component {
                                         </Row>
                                         <div className="mt-4 d-flex align-items-center">
                                             <h6 className="mb-0">
-                                                <a href="#/login" className="text-primary">Sign in existing account</a>
+                                                <Link to="/login" className="text-primary">Sign in existing account</Link>
                                             </h6>
                                             <div className="ml-auto">
                                                 <Button color="primary" size="lg">Recover Password</Button>

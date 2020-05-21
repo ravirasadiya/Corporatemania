@@ -13,9 +13,9 @@ const rootElement = document.getElementById('root');
 const renderApp = Component => {
   ReactDOM.render(
     <Provider store={store}>
-      <HashRouter>
+      
         <Component />
-      </HashRouter>
+      
     </Provider>,
     rootElement
   );
