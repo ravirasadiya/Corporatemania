@@ -7,9 +7,45 @@ import bg2 from '../../../assets/utils/images/originals/citydark.jpg';
 import bg3 from '../../../assets/utils/images/originals/citynights.jpg';
 
 import {Col, Row, Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import { userActions } from '../../../actions';
+import { connect } from 'react-redux'
 
-export default class Login extends Component {
+class Login extends Component {
+    constructor(props) {
+        super(props);
+
+        // reset login status
+        // this.props.dispatch(userActions.logout());
+
+        this.state = {
+            email: '',
+            password: '',
+            submitted: false
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        this.setState({ submitted: true });
+        const { email, password } = this.state;
+        const { dispatch } = this.props;
+        if (email && password) {
+            dispatch(userActions.login(email, password));
+        }
+    }
+
     render() {
+        
+        const { email, password, submitted } = this.state;
         let settings = {
             dots: true,
             infinite: true,
@@ -88,20 +124,24 @@ export default class Login extends Component {
                                 </h6>
                                 <Row className="divider"/>
                                 <div>
-                                    <Form>
+                                    <Form onSubmit={this.handleSubmit}>
                                         <Row form>
                                             <Col md={6}>
                                                 <FormGroup>
-                                                    <Label for="exampleEmail">Email</Label>
-                                                    <Input type="email" name="email" id="exampleEmail"
-                                                           placeholder="Email here..."/>
+                                                    <Label for="email">
+                                                        <span className="text-danger">*</span>
+                                                        {' '}Email
+                                                    </Label>
+                                                    <Input type="email" name="email" value={email} onChange={this.handleChange} id="email" placeholder="E-Mail here..." invalid={submitted && !email}/>
                                                 </FormGroup>
                                             </Col>
                                             <Col md={6}>
                                                 <FormGroup>
-                                                    <Label for="examplePassword">Password</Label>
-                                                    <Input type="password" name="password" id="examplePassword"
-                                                           placeholder="Password here..."/>
+                                                    <Label for="password">
+                                                        <span className="text-danger">*</span>
+                                                        {' '}Password
+                                                    </Label>
+                                                    <Input type="password" name="password" value={password} onChange={this.handleChange} id="password" placeholder="Password here..." invalid={submitted && !password}/>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -114,7 +154,7 @@ export default class Login extends Component {
                                             <div className="ml-auto">
                                                 <Link to="/forgot-password" className="btn-lg btn btn-link">Recover
                                                     Password</Link>{' '}{' '}
-                                                <Button color="primary" size="lg">Login to Dashboard</Button>
+                                                <Button type="submit"  color="primary" size="lg">Login to Dashboard</Button>
                                             </div>
                                         </div>
                                     </Form>
@@ -127,3 +167,5 @@ export default class Login extends Component {
         );
     }
 }
+
+export default connect()(Login);

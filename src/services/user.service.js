@@ -10,18 +10,23 @@ export const userService = {
     delete: _delete
 };
 
-function login(username, password) {
+function login(login) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify(login)
     };
 
-    return fetch(`/users/authenticate`, requestOptions)
+    return fetch(`http://localhost:9000/api/auth/login`, requestOptions)
         .then(handleResponse)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
+        .then(data => {
+            let user = data.data;
+            // login successful if there's a jwt token in the response
+            if (user.token) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user.user));
+                localStorage.setItem('token', user.token);
+            }
 
             return user;
         });

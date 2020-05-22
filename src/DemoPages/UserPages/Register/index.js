@@ -105,7 +105,7 @@ import {Col, Row, Button, Form, FormGroup, FormFeedback, Label, Input} from 'rea
                                                 <span className="text-danger">*</span>
                                                 {' '}Password
                                             </Label>
-                                            <Input type="text" name="password" value={user.password} onChange={handleChange} id="password" placeholder="Password here..." invalid={submitted && !user.password}/>
+                                            <Input type="password" name="password" value={user.password} onChange={handleChange} id="password" placeholder="Password here..." invalid={submitted && !user.password}/>
                                         </FormGroup>
                                     </Col>
                                     <Col md={6}>
@@ -114,7 +114,7 @@ import {Col, Row, Button, Form, FormGroup, FormFeedback, Label, Input} from 'rea
                                                 <span className="text-danger">*</span>
                                                 {' '}Repeat Password
                                             </Label>
-                                            <Input type="text" name="rpassword" value={user.rpassword} onChange={handleChange} id="rpassword" placeholder="Repeat Password here..." invalid={submitted && (user.rpassword != user.password || !user.rpassword)}/>
+                                            <Input type="password" name="rpassword" value={user.rpassword} onChange={handleChange} id="rpassword" placeholder="Repeat Password here..." invalid={submitted && (user.rpassword != user.password || !user.rpassword)}/>
                                         </FormGroup>
                                     </Col>
                                 </Row>

@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {Router, Route, Switch, Redirect} from 'react-router-dom';
 import React, {Suspense, lazy, Fragment, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { PrivateRoute } from '../../components';
@@ -42,7 +42,7 @@ const AppMain = () => {
                 </div>
             }>
                 {/* <Route path="/" component={UserPages}/> */}
-                <Router>
+                <Router history={history}>
                         <Switch>
                             <PrivateRoute exact path="/" component={CRMDashboard} />
                             <Route path="/login" component={Login} />
