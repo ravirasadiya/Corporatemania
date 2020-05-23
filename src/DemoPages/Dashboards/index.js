@@ -4,10 +4,6 @@ import {Route} from 'react-router-dom';
 // DASHBOARDS
 
 import Category from './Category/';
-import CommerceDashboard from './Commerce/';
-import CRMDashboard from './CRM/';
-import MinimalDashboard1 from './Minimal/Variation1';
-import MinimalDashboard2 from './Minimal/Variation2';
 
 // Layout
 
@@ -27,10 +23,6 @@ const Dashboards = ({match}) => (
             <div className="app-main__outer">
                 <div className="app-main__inner">
                     <Route path={`${match.url}/categories`} component={Category}/>
-                    <Route path={`${match.url}/commerce`} component={CommerceDashboard}/>
-                    <Route path={`${match.url}/crm`} component={CRMDashboard}/>
-                    <Route path={`${match.url}/minimal-dashboard-1`} component={MinimalDashboard1}/>
-                    <Route path={`${match.url}/minimal-dashboard-2`} component={MinimalDashboard2}/>
                 </div>
                 <AppFooter/>
             </div>
