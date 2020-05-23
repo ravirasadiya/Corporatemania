@@ -1,5 +1,5 @@
 import { authHeader } from '../helpers';
-
+import { apiService } from './api.service'
 export const userService = {
     login,
     logout,
@@ -11,14 +11,7 @@ export const userService = {
 };
 
 function login(login) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(login)
-    };
-
-    return fetch(`http://localhost:9000/api/auth/login`, requestOptions)
-        .then(handleResponse)
+    return apiService.POST(`api/auth/login`, login)
         .then(data => {
             let user = data.data;
             // login successful if there's a jwt token in the response
@@ -27,7 +20,6 @@ function login(login) {
                 localStorage.setItem('user', JSON.stringify(user.user));
                 localStorage.setItem('token', user.token);
             }
-
             return user;
         });
 }
@@ -43,7 +35,7 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`/users`, requestOptions).then(handleResponse);
+    return fetch(`/users`, requestOptions);
 }
 
 function getById(id) {
@@ -52,17 +44,11 @@ function getById(id) {
         headers: authHeader()
     };
 
-    return fetch(`/users/${id}`, requestOptions).then(handleResponse);
+    return fetch(`/users/${id}`, requestOptions);
 }
 
 function register(user) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjUsImlhdCI6MTU5MDA3NTYyNX0.xyak6BmUpDNIyTCMqPD3eqJSJnEXlAdFYEwE76T00Eg' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`http://localhost:9000/api/auth/create-user`, requestOptions).then(handleResponse);
+    return apiService.POST(`api/auth/create-user`, user);
 }
 
 function update(user) {
@@ -72,7 +58,7 @@ function update(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`/users/${user.id}`, requestOptions).then(handleResponse);;
+    return fetch(`/users/${user.id}`, requestOptions);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -82,24 +68,6 @@ function _delete(id) {
         headers: authHeader()
     };
 
-    return fetch(`/users/${id}`, requestOptions).then(handleResponse);
+    return fetch(`/users/${id}`, requestOptions);
 }
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                window.location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-        console.log(data);
-
-        return data;
-    });
-}

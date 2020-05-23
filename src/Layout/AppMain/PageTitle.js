@@ -15,7 +15,6 @@ class PageTitle extends Component {
         let {
             enablePageTitleIcon,
             enablePageTitleSubheading,
-
             heading,
             icon,
             subheading
@@ -40,9 +39,9 @@ class PageTitle extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="page-title-actions">
-                        {this.randomize(arr)}
-                    </div>
+                    {/* <div className="page-title-actions">
+                        <TitleComponent3 />
+                    </div> */}
                 </div>
             </div>
         );

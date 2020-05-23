@@ -11,9 +11,10 @@ import {
 import Login from '../../DemoPages/UserPages/Login';
 import Register from '../../DemoPages/UserPages/Register';
 import ForgotPassword from '../../DemoPages/UserPages/ForgotPassword';
-import CRMDashboard from '../../DemoPages/Dashboards/CRM';
+// import CRMDashboard from '../../DemoPages/Dashboards/CRM';
 
 const UserPages = lazy(() => import('../../DemoPages/UserPages'));
+const Dashboards = lazy(() => import('../../DemoPages/Dashboards'));
 
 const AppMain = () => {
     const dispatch = useDispatch();
@@ -44,11 +45,12 @@ const AppMain = () => {
                 {/* <Route path="/" component={UserPages}/> */}
                 <Router history={history}>
                         <Switch>
-                            <PrivateRoute exact path="/" component={CRMDashboard} />
+                            <PrivateRoute path="/dashboard" component={Dashboards} />
                             <Route path="/login" component={Login} />
                             <Route path="/register" component={Register} />
                             <Route path="/forgot-password" component={ForgotPassword} />
-                            <Redirect from="*" to="/login" />
+                            {/* <Route path="/categories/create" component={CreateCategory}/> */}
+                            {/* <Redirect from="*" to="/login" /> */}
                         </Switch>
                     </Router>
             </Suspense>

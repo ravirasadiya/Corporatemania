@@ -1,66 +1,15 @@
 export const MainNav = [
     {
         icon: 'pe-7s-rocket',
-        label: 'Dashboards',
-        content: [
-            {
-                label: 'Analytics',
-                to: '#/dashboards/analytics',
-            },
-            {
-                label: 'Commerce',
-                to: '#/dashboards/commerce',
-            },
-            {
-                label: 'Sales',
-                to: '#/dashboards/sales',
-            },
-            {
-                label: 'Minimal',
-                content: [
-                    {
-                        label: 'Variation 1',
-                        to: '#/dashboards/minimal-dashboard-1',
-                    },
-                    {
-                        label: 'Variation 2',
-                        to: '#/dashboards/minimal-dashboard-2',
-                    },
-                ],
-            },
-            {
-                label: 'CRM',
-                to: '#/dashboards/crm',
-            }
-        ],
+        label: 'Dashboards'
     },
     {
         icon: 'pe-7s-browser',
-        label: 'Pages',
+        label: 'Ads',
         content: [
             {
-                label: 'Login',
-                to: '#/pages/login',
-            },
-            {
-                label: 'Login Boxed',
-                to: '#/pages/login-boxed',
-            },
-            {
-                label: 'Register',
-                to: '#/pages/register',
-            },
-            {
-                label: 'Register Boxed',
-                to: '#/pages/register-boxed',
-            },
-            {
-                label: 'Forgot Password',
-                to: '#/pages/forgot-password',
-            },
-            {
-                label: 'Forgot Password Boxed',
-                to: '#/pages/forgot-password-boxed',
+                label: 'Categories',
+                to: '/dashboard/categories',
             },
         ],
     },

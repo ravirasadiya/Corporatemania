@@ -9,9 +9,6 @@ import HeaderLogo from '../AppLogo/index';
 
 import SearchBox from '../../../../../Layout/AppHeader/Components/SearchBox';
 import UserBox from '../../../../../Layout/AppHeader/Components/UserBox';
-import HeaderRightDrawer from "../../../../../Layout/AppHeader/Components/HeaderRightDrawer";
-
-import HeaderDots from "../../../../../Layout/AppHeader/Components/HeaderDots";
 
 class Header extends React.Component {
     render() {
@@ -38,11 +35,9 @@ class Header extends React.Component {
                     )}>
                         <div className="app-header-left">
                             <SearchBox/>
-                            <HeaderDots/>
                         </div>
                         <div className="app-header-right">
                             <UserBox/>
-                            <HeaderRightDrawer/>
                         </div>
                     </div>
                 </ReactCSSTransitionGroup>
