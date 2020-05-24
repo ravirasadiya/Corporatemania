@@ -1,25 +1,17 @@
-import React, {Fragment} from 'react';
-import MegaMenuFooter from './Components/FooterMegaMenu';
-import FooterDots from './Components/FooterDots';
+import React, { Fragment } from 'react';
 
 class AppFooter extends React.Component {
-    render() {
-
-
-        return (
-            <Fragment>
-                <div className="app-footer">
-                    <div className="app-footer__inner">
-                        <div className="app-footer-left">
-                            <FooterDots/>
-                        </div>
-                        <div className="app-footer-right">
-                            <MegaMenuFooter/>
-                        </div>
-                    </div>
-                </div>
-            </Fragment>
-        )}
+  render() {
+    return (
+      <Fragment>
+        <div className='app-footer'>
+          <div className='app-footer__inner'>
+            <div className='app-footer-left'></div>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
 }
 
 export default AppFooter;
