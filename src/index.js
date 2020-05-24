@@ -4,7 +4,7 @@ import * as serviceWorker from './serviceWorker';
 import './assets/base.scss';
 import { Provider } from 'react-redux';
 import configureStore from './config/configureStore';
-import Main from './DemoPages/Main';
+import Main from './components/Main';
 
 const store = configureStore();
 const rootElement = document.getElementById('root');

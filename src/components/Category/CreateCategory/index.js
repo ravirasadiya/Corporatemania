@@ -63,20 +63,6 @@ class CreateCategory extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ submitted: true });
-    const {
-      name,
-      slug,
-      description,
-      parentInt,
-      icon,
-      image,
-      sortOrder,
-      metaTagTitle,
-      metaTagDescription,
-      metaTagKeyword,
-      status,
-    } = this.state;
-
     const { dispatch } = this.props;
     dispatch(categoryActions.addCategory(this.state));
   }

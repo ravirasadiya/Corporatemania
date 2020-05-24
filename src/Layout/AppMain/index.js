@@ -6,12 +6,12 @@ import { history } from '../../_helpers';
 import Loader from 'react-loaders';
 
 import { ToastContainer } from 'react-toastify';
-import Login from '../../DemoPages/UserPages/Login';
-import Register from '../../DemoPages/UserPages/Register';
-import ForgotPassword from '../../DemoPages/UserPages/ForgotPassword';
+import Login from '../../components/UserPages/Login';
+import Register from '../../components/UserPages/Register';
+import ForgotPassword from '../../components/UserPages/ForgotPassword';
 
-const UserPages = lazy(() => import('../../DemoPages/UserPages'));
-const Dashboards = lazy(() => import('../../DemoPages/Dashboards'));
+const UserPages = lazy(() => import('../../components/UserPages'));
+const Dashboards = lazy(() => import('../../components/Dashboards'));
 
 const AppMain = () => {
   const dispatch = useDispatch();

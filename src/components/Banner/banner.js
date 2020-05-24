@@ -49,17 +49,17 @@ export default class BannerHome extends Component {
             subheading='This is an example dashboard created using build-in elements and components.'
             icon='pe-7s-car icon-gradient bg-mean-fruit'
           />
-          <Row>
-            <Button
-              className='mb-2 mr-2'
-              color='primary'
-              onClick={() => {
-                this.props.history.push(this.props.match.url + '/create');
-              }}
-            >
-              Add Category
-            </Button>
-          </Row>
+
+          <Button
+            className='mb-2'
+            color='primary'
+            onClick={() => {
+              this.props.history.push(this.props.match.url + '/addBanner');
+            }}
+          >
+            Add Banner
+          </Button>
+
           <Col md='12'>
             <Card className='main-card mb-3'>
               <CardBody>
@@ -80,7 +80,7 @@ export default class BannerHome extends Component {
                                       row.original.image,
                                       row.original.imagePath,
                                       40,
-                                      120
+                                      90
                                     )}
                                     alt=''
                                   />
@@ -98,7 +98,47 @@ export default class BannerHome extends Component {
                           accessor: 'link',
                         },
                         {
+                          Header: 'Position',
+                          accessor: 'position',
+                        },
+                        {
                           Header: 'Status',
+                          Cell: (row) => (
+                            <div>
+                              {row.original.isActive && (
+                                <div className='mb-2 mr-2 badge badge-success'>
+                                  Active
+                                </div>
+                              )}
+                              {!row.original.isActive && (
+                                <div className='mb-2 mr-2 badge  badge-danger'>
+                                  Inactive
+                                </div>
+                              )}
+                            </div>
+                          ),
+                          accessor: 'isActive',
+                        },
+                        {
+                          Header: 'Action',
+                          Cell: (row) => (
+                            <div>
+                              <Button
+                                className='mb-2 mr-2 btn-icon btn-icon-only'
+                                color='warning'
+                              >
+                                <i className='lnr-pencil btn-icon-wrapper'> </i>
+                              </Button>
+                              <Button
+                                className='mb-2 mr-2 btn-icon btn-icon-only'
+                                color='danger'
+                              >
+                                <i className='pe-7s-trash btn-icon-wrapper'>
+                                  {' '}
+                                </i>
+                              </Button>
+                            </div>
+                          ),
                           accessor: 'isActive',
                         },
                       ],

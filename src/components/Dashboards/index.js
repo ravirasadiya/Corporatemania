@@ -8,12 +8,12 @@ import Banner from '../Banner';
 
 // Layout
 
-import AppHeader from '../../Layout/AppHeader/';
-import AppSidebar from '../../Layout/AppSidebar/';
-import AppFooter from '../../Layout/AppFooter/';
+import AppHeader from '../../Layout/AppHeader';
+import AppSidebar from '../../Layout/AppSidebar';
+import AppFooter from '../../Layout/AppFooter';
 
 // Theme Options
-import ThemeOptions from '../../Layout/ThemeOptions/';
+import ThemeOptions from '../../Layout/ThemeOptions';
 
 const Dashboards = ({ match }) => (
   <Fragment>
