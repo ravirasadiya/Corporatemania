@@ -13,23 +13,46 @@ import {
   FormText,
   Container,
 } from 'reactstrap';
-import { toBase64 } from '../../_helpers';
+import { toBase64, imageResizeURL, URLToBase64 } from '../../_helpers';
 import { connect } from 'react-redux';
 import { bannerActions } from '../../_actions';
 
 class AddBanner extends Component {
   constructor(props) {
     super(props);
+    console.log(props.location.state.detail);
+    if (!props.location.state.detail) {
+      this.state = {
+        title: '',
+        content: '',
+        url: '',
+        position: '',
+        selectedOption: 1,
+        image: '',
+        submitted: false,
+        edit: false,
+      };
+    } else {
+      const data = props.location.state.detail;
+      URLToBase64(imageResizeURL(data.image, data.imagePath, 690, 1920)).then(
+        (data) => {
+          this.setState({
+            image: data,
+          });
+        }
+      );
 
-    this.state = {
-      title: '',
-      content: '',
-      url: '',
-      position: '',
-      selectedOption: 1,
-      image: '',
-      submitted: false,
-    };
+      this.state = {
+        title: data.title,
+        content: data.content,
+        url: data.url,
+        position: data.position,
+        selectedOption: data.isActive,
+        submitted: false,
+        edit: true,
+        bannerId: data.bannerId,
+      };
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,10 +66,12 @@ class AddBanner extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ submitted: true });
-    const { image } = this.state;
+    const { image, edit } = this.state;
     const { dispatch } = this.props;
-    if (image) {
+    if (image & !edit) {
       dispatch(bannerActions.addBanner(this.state));
+    } else if (image && edit) {
+      dispatch(bannerActions.updateBanner(this.state));
     }
   }
 
@@ -65,6 +90,7 @@ class AddBanner extends Component {
       position,
       image,
       submitted,
+      edit,
     } = this.state;
     return (
       <Fragment>
@@ -79,7 +105,8 @@ class AddBanner extends Component {
           <Container fluid>
             <Card className='main-card mb-3'>
               <CardBody>
-                <CardTitle>Add New Banner</CardTitle>
+                {!edit && <CardTitle>Add New Banner</CardTitle>}
+                {edit && <CardTitle>Edit Banner</CardTitle>}
                 <Form onSubmit={this.handleSubmit}>
                   <FormGroup row>
                     <Label for='title' sm={2}>
@@ -151,6 +178,7 @@ class AddBanner extends Component {
                       <FormText color='muted'>
                         Used in the Main Banner area on the homepage
                       </FormText>
+                      {image && <img className='w-100' src={image} />}
                     </Col>
                   </FormGroup>
                   <FormGroup row>

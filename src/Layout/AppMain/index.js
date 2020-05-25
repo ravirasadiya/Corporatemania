@@ -50,7 +50,7 @@ const AppMain = () => {
             <Route path='/register' component={Register} />
             <Route path='/forgot-password' component={ForgotPassword} />
             {/* <Route path="/categories/create" component={CreateCategory}/> */}
-            {/* <Redirect from="*" to="/login" /> */}
+            <Redirect from='*' to='/dashboard' />
           </Switch>
         </Router>
       </Suspense>

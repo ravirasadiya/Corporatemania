@@ -5,6 +5,7 @@ import { history } from '../_helpers';
 
 export const bannerActions = {
   addBanner,
+  updateBanner,
 };
 
 function addBanner(banner) {
@@ -41,4 +42,31 @@ function addBanner(banner) {
   function failure(error) {
     return { type: bannerConstants.ADD_FAILURE, error };
   }
+}
+
+function updateBanner(banner) {
+  return (dispatch) => {
+    // dispatch(request(banner));
+    const bannerRequest = {
+      bannerId: banner.bannerId,
+      title: banner.title,
+      content: banner.content,
+      image: banner.image,
+      link: banner.url,
+      position: banner.position,
+      status: banner.selectedOption,
+    };
+
+    bannerService.updateBanner(bannerRequest).then(
+      (banner) => {
+        // dispatch(success());
+        history.goBack();
+        // dispatch(alertActions.success('Registration successful'));
+      },
+      (error) => {
+        // dispatch(failure(error));
+        // dispatch(alertActions.error(error));
+      }
+    );
+  };
 }

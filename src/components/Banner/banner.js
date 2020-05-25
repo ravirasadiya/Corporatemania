@@ -11,6 +11,10 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from 'reactstrap';
 import ReactTable from 'react-table';
 import { bannerService } from '../../_services';
@@ -21,6 +25,7 @@ export default class BannerHome extends Component {
     super(props);
     this.state = {
       bannerList: [],
+      modal: false,
     };
 
     bannerService.getAll().then((data) => {
@@ -28,9 +33,23 @@ export default class BannerHome extends Component {
         bannerList: data,
       });
     });
+    this.toggle = this.toggle.bind(this);
   }
 
-  componentDidMount() {}
+  editBanner(data) {
+    console.log(data);
+    this.props.history.push({
+      pathname: this.props.match.url + '/addBanner',
+      state: { detail: data },
+    });
+  }
+
+  toggle(bannerId) {
+    console.log(bannerId);
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
 
   render() {
     const { bannerList } = this.state;
@@ -94,6 +113,10 @@ export default class BannerHome extends Component {
                           accessor: 'title',
                         },
                         {
+                          Header: 'Content',
+                          accessor: 'content',
+                        },
+                        {
                           Header: 'Link',
                           accessor: 'link',
                         },
@@ -126,12 +149,20 @@ export default class BannerHome extends Component {
                               <Button
                                 className='mb-2 mr-2 btn-icon btn-icon-only'
                                 color='warning'
+                                onClick={this.editBanner.bind(
+                                  this,
+                                  row.original
+                                )}
                               >
                                 <i className='lnr-pencil btn-icon-wrapper'> </i>
                               </Button>
                               <Button
                                 className='mb-2 mr-2 btn-icon btn-icon-only'
                                 color='danger'
+                                onClick={this.toggle.bind(
+                                  this,
+                                  row.original.bannerId
+                                )}
                               >
                                 <i className='pe-7s-trash btn-icon-wrapper'>
                                   {' '}
@@ -150,6 +181,22 @@ export default class BannerHome extends Component {
               </CardBody>
             </Card>
           </Col>
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            className={this.props.className}
+          >
+            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <ModalBody>Are you sure want to delete it?</ModalBody>
+            <ModalFooter>
+              <Button color='link' onClick={this.toggle}>
+                Cancel
+              </Button>
+              <Button color='primary' onClick={this.toggle}>
+                Delete
+              </Button>{' '}
+            </ModalFooter>
+          </Modal>
         </ReactCSSTransitionGroup>
       </Fragment>
     );

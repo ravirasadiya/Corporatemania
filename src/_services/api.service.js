@@ -3,6 +3,8 @@ import { authHeader } from '../_helpers';
 export const apiService = {
   POST,
   GET,
+  PUT,
+  DELETE,
 };
 
 function GET(url) {
@@ -20,6 +22,29 @@ function POST(url, data) {
     method: 'POST',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
+  };
+
+  return fetch(`http://localhost:9000/` + url, requestOptions).then(
+    handleResponse
+  );
+}
+
+function PUT(url, data) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  };
+
+  return fetch(`http://localhost:9000/` + url, requestOptions).then(
+    handleResponse
+  );
+}
+
+function DELETE(url) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
   };
 
   return fetch(`http://localhost:9000/` + url, requestOptions).then(

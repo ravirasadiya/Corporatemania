@@ -41,3 +41,21 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
+
+export const URLToBase64 = (url) => {
+  const requestOptions = {
+    method: 'GET',
+  };
+  return new Promise((resolve, reject) => {
+    fetch(url, requestOptions)
+      .then((response) => response.blob())
+      .then((blob) => {
+        var reader = new FileReader();
+        reader.onload = function() {
+          resolve(this.result);
+        };
+        reader.readAsDataURL(blob);
+      });
+  });
+};
+// return imageToBase64(url);
