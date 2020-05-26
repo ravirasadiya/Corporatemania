@@ -23,12 +23,11 @@ function updateBanner(requestData) {
     });
 }
 
-function deleteBanner(requestData) {
+function deleteBanner(bannerId) {
   return apiService
-    .DELETE(`api/banner/update-banner/` + requestData.bannerId)
+    .DELETE(`api/banner/delete-banner/` + bannerId)
     .then((data) => {
-      let editbanner = data.data;
-      return editbanner;
+      return data;
     });
 }
 

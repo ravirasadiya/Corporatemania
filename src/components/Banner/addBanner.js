@@ -20,19 +20,8 @@ import { bannerActions } from '../../_actions';
 class AddBanner extends Component {
   constructor(props) {
     super(props);
-    console.log(props.location.state.detail);
-    if (!props.location.state.detail) {
-      this.state = {
-        title: '',
-        content: '',
-        url: '',
-        position: '',
-        selectedOption: 1,
-        image: '',
-        submitted: false,
-        edit: false,
-      };
-    } else {
+    console.log(props);
+    if (props.location.state != undefined && props.location.state.detail) {
       const data = props.location.state.detail;
       URLToBase64(imageResizeURL(data.image, data.imagePath, 690, 1920)).then(
         (data) => {
@@ -41,16 +30,27 @@ class AddBanner extends Component {
           });
         }
       );
-
+      console.log(data);
       this.state = {
         title: data.title,
         content: data.content,
-        url: data.url,
+        url: data.link,
         position: data.position,
-        selectedOption: data.isActive,
+        status: data.isActive,
         submitted: false,
         edit: true,
         bannerId: data.bannerId,
+      };
+    } else {
+      this.state = {
+        title: '',
+        content: '',
+        url: '',
+        position: '',
+        status: 1,
+        image: '',
+        submitted: false,
+        edit: false,
       };
     }
 
@@ -68,7 +68,7 @@ class AddBanner extends Component {
     this.setState({ submitted: true });
     const { image, edit } = this.state;
     const { dispatch } = this.props;
-    if (image & !edit) {
+    if (image && !edit) {
       dispatch(bannerActions.addBanner(this.state));
     } else if (image && edit) {
       dispatch(bannerActions.updateBanner(this.state));
@@ -86,7 +86,7 @@ class AddBanner extends Component {
       title,
       content,
       url,
-      selectedOption,
+      status,
       position,
       image,
       submitted,
@@ -191,6 +191,7 @@ class AddBanner extends Component {
                         name='status'
                         id='status'
                         onChange={this.handleChange}
+                        value={this.state.status}
                       >
                         <option key={'active'} value={1}>
                           Active

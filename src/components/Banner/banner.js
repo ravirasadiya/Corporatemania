@@ -37,17 +37,31 @@ export default class BannerHome extends Component {
   }
 
   editBanner(data) {
-    console.log(data);
     this.props.history.push({
       pathname: this.props.match.url + '/addBanner',
       state: { detail: data },
     });
   }
 
+  delete(e) {
+    bannerService.deleteBanner(e).then((data) => {
+      console.log(data);
+      if (data.status) {
+        const updateBanenr = this.state.bannerList.filter(function(item) {
+          return item.bannerId !== e;
+        });
+        this.setState({
+          bannerList: updateBanenr,
+        });
+        this.toggle();
+      }
+    });
+  }
+
   toggle(bannerId) {
-    console.log(bannerId);
     this.setState({
       modal: !this.state.modal,
+      activeItemId: bannerId,
     });
   }
 
@@ -128,19 +142,18 @@ export default class BannerHome extends Component {
                           Header: 'Status',
                           Cell: (row) => (
                             <div>
-                              {row.original.isActive && (
+                              {row.original.isActive != 0 && (
                                 <div className='mb-2 mr-2 badge badge-success'>
                                   Active
                                 </div>
                               )}
-                              {!row.original.isActive && (
+                              {row.original.isActive == 0 && (
                                 <div className='mb-2 mr-2 badge  badge-danger'>
                                   Inactive
                                 </div>
                               )}
                             </div>
                           ),
-                          accessor: 'isActive',
                         },
                         {
                           Header: 'Action',
@@ -192,7 +205,10 @@ export default class BannerHome extends Component {
               <Button color='link' onClick={this.toggle}>
                 Cancel
               </Button>
-              <Button color='primary' onClick={this.toggle}>
+              <Button
+                color='primary'
+                onClick={this.delete.bind(this, this.state.activeItemId)}
+              >
                 Delete
               </Button>{' '}
             </ModalFooter>

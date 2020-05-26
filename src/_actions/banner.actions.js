@@ -17,7 +17,7 @@ function addBanner(banner) {
       image: banner.image,
       link: banner.url,
       position: banner.position,
-      status: banner.selectedOption,
+      status: banner.status,
     };
 
     bannerService.addBanner(bannerRequest).then(
@@ -54,7 +54,7 @@ function updateBanner(banner) {
       image: banner.image,
       link: banner.url,
       position: banner.position,
-      status: banner.selectedOption,
+      status: parseInt(banner.status),
     };
 
     bannerService.updateBanner(bannerRequest).then(
