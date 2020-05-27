@@ -13,4 +13,9 @@ export const MainNav = [
     label: 'Categories',
     to: '/dashboard/categories',
   },
+  {
+    icon: 'pe-7s-browser',
+    label: 'Product',
+    to: '/dashboard/product',
+  },
 ];

@@ -14,6 +14,7 @@ import AppFooter from '../../Layout/AppFooter';
 
 // Theme Options
 import ThemeOptions from '../../Layout/ThemeOptions';
+import Prodcut from '../Product';
 
 const Dashboards = ({ match }) => (
   <Fragment>
@@ -25,6 +26,7 @@ const Dashboards = ({ match }) => (
         <div className='app-main__inner'>
           <Route path={`${match.url}/categories`} component={Category} />
           <Route path={`${match.url}/banner`} component={Banner} />
+          <Route path={`${match.url}/product`} component={Prodcut} />
         </div>
         <AppFooter />
       </div>

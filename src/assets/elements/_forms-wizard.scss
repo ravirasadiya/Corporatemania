@@ -29,7 +29,7 @@
       content: '';
       background: $gray-300;
       z-index: 5;
-      transition: all .2s;
+      transition: all 0.2s;
     }
 
     &::after {
@@ -67,7 +67,7 @@
       margin: 0 auto 0.5rem;
       position: relative;
       z-index: 7;
-      transition: all .2s;
+      transition: all 0.2s;
     }
 
     &.form-wizard-step-doing {
@@ -109,7 +109,6 @@
   }
 }
 
-
 // Form Wizard Alternate
 
 .forms-wizard-alt {
@@ -144,7 +143,7 @@
       padding: ($layout-spacer-x / 2);
       margin-bottom: ($layout-spacer-x / 3);
       @include border-radius($border-radius-lg);
-      transition: all .2s;
+      transition: all 0.2s;
 
       &::before,
       &::after {
@@ -164,7 +163,7 @@
         color: $white;
 
         em {
-          background: rgba(255,255,255,.2);
+          background: rgba(255, 255, 255, 0.2);
         }
       }
     }
@@ -172,6 +171,7 @@
 
   .form-wizard-content {
     width: 70%;
-    overflow: auto;
+    // overflow: auto;
+    overflow: hidden;
   }
 }
