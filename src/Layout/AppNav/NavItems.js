@@ -10,12 +10,7 @@ export const MainNav = [
   },
   {
     icon: 'pe-7s-browser',
-    label: 'Ads',
-    content: [
-      {
-        label: 'Categories',
-        to: '/dashboard/categories',
-      },
-    ],
+    label: 'Categories',
+    to: '/dashboard/categories',
   },
 ];

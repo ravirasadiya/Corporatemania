@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link, Route } from 'react-router-dom';
-import CategoryDefault from './CategoryDefault';
-import CreateCategory from './CreateCategory';
+import CategoryHome from './category';
+import AddCategory from './addCategory';
 
 export default class Category extends Component {
   render() {
@@ -10,11 +10,11 @@ export default class Category extends Component {
         <Route
           exact
           path={`${this.props.match.url}`}
-          component={CategoryDefault}
+          component={CategoryHome}
         />
         <Route
           path={`${this.props.match.url}/create`}
-          component={CreateCategory}
+          component={AddCategory}
         />
       </Fragment>
     );

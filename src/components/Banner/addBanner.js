@@ -20,7 +20,6 @@ import { bannerActions } from '../../_actions';
 class AddBanner extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     if (props.location.state != undefined && props.location.state.detail) {
       const data = props.location.state.detail;
       URLToBase64(imageResizeURL(data.image, data.imagePath, 690, 1920)).then(
@@ -68,9 +67,9 @@ class AddBanner extends Component {
     this.setState({ submitted: true });
     const { image, edit } = this.state;
     const { dispatch } = this.props;
-    if (image && !edit) {
+    if (!edit) {
       dispatch(bannerActions.addBanner(this.state));
-    } else if (image && edit) {
+    } else if (edit) {
       dispatch(bannerActions.updateBanner(this.state));
     }
   }

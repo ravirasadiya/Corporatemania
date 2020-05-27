@@ -53,7 +53,7 @@ export default class BannerHome extends Component {
         this.setState({
           bannerList: updateBanenr,
         });
-        this.toggle();
+        // this.toggle();
       }
     });
   }
@@ -172,7 +172,7 @@ export default class BannerHome extends Component {
                               <Button
                                 className='mb-2 mr-2 btn-icon btn-icon-only'
                                 color='danger'
-                                onClick={this.toggle.bind(
+                                onClick={this.delete.bind(
                                   this,
                                   row.original.bannerId
                                 )}
@@ -183,7 +183,6 @@ export default class BannerHome extends Component {
                               </Button>
                             </div>
                           ),
-                          accessor: 'isActive',
                         },
                       ],
                     },

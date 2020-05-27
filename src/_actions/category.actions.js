@@ -5,16 +5,40 @@ import { history } from '../_helpers';
 
 export const categoryActions = {
   addCategory,
+  updateCategory,
 };
 
 function addCategory(data) {
   return (dispatch) => {
-    let createCategory = {
+    let addCategory = {
       name: data.name,
-      slug: data.slug,
-      description: data.description,
       parentInt: data.parentInt,
-      icon: data.icon,
+      sortOrder: data.sortOrder,
+      description: data.description,
+      metaTagTitle: data.metaTagTitle,
+      metaTagDescription: data.metaTagDescription,
+      metaTagKeyword: data.metaTagKeyword,
+      status: data.status,
+    };
+    categoryService.addCategory(addCategory).then(
+      (user) => {
+        // dispatch(success(user));
+        history.goBack();
+      },
+      (error) => {
+        // dispatch(failure(error));
+        // dispatch(alertActions.error(error));
+      }
+    );
+  };
+}
+
+function updateCategory(data) {
+  return (dispatch) => {
+    let updateCategory = {
+      categoryId: data.categoryId,
+      name: data.name,
+      parentInt: data.parentInt,
       image: data.image,
       sortOrder: data.sortOrder,
       metaTagTitle: data.metaTagTitle,
@@ -22,10 +46,10 @@ function addCategory(data) {
       metaTagKeyword: data.metaTagKeyword,
       status: data.status,
     };
-    categoryService.addCategory(createCategory).then(
+    categoryService.updateCategory(updateCategory).then(
       (user) => {
         // dispatch(success(user));
-        console.log('added');
+        history.goBack();
       },
       (error) => {
         // dispatch(failure(error));

@@ -1,31 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Link, Route } from 'react-router-dom';
-import PageTitle from '../../../Layout/AppMain/PageTitle';
-import {
-  Card,
-  CardTitle,
-  Button,
-  Row,
-  Col,
-  CardBody,
-  UncontrolledButtonDropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-} from 'reactstrap';
+import PageTitle from '../../Layout/AppMain/PageTitle';
+import { Card, Button, Row, Col, CardBody } from 'reactstrap';
 import ReactTable from 'react-table';
-import { makeData } from './utils';
-import { categoryService } from '../../../_services';
+import { categoryService } from '../../_services';
 
-export default class CategoryDefault extends Component {
+export default class CategoryHome extends Component {
   constructor() {
     super();
     this.state = {
       categoryList: [],
-    };
-    this.state = {
-      data: makeData(),
     };
   }
 
@@ -35,6 +19,13 @@ export default class CategoryDefault extends Component {
       this.setState({
         categoryList: data,
       });
+    });
+  }
+
+  editCategory(data) {
+    this.props.history.push({
+      pathname: this.props.match.url + '/create',
+      state: { detail: data },
     });
   }
 
@@ -96,8 +87,12 @@ export default class CategoryDefault extends Component {
                           ),
                         },
                         {
-                          Header: 'Name',
+                          Header: 'Category Name',
                           accessor: 'name',
+                        },
+                        {
+                          Header: 'Levels',
+                          accessor: 'path',
                         },
                         {
                           Header: 'Sort Order',
@@ -105,7 +100,20 @@ export default class CategoryDefault extends Component {
                         },
                         {
                           Header: 'Status',
-                          accessor: 'isActive',
+                          Cell: (row) => (
+                            <div>
+                              {row.original.isActive != 0 && (
+                                <div className='mb-2 mr-2 badge badge-success'>
+                                  Active
+                                </div>
+                              )}
+                              {row.original.isActive == 0 && (
+                                <div className='mb-2 mr-2 badge  badge-danger'>
+                                  Inactive
+                                </div>
+                              )}
+                            </div>
+                          ),
                         },
                       ],
                     },
@@ -113,42 +121,26 @@ export default class CategoryDefault extends Component {
                       columns: [
                         {
                           Header: 'Actions',
-                          accessor: 'actions',
                           Cell: (row) => (
-                            <div className='d-block w-100 text-center'>
-                              <UncontrolledButtonDropdown>
-                                <DropdownToggle
-                                  caret
-                                  className='btn-icon btn-icon-only btn btn-link'
-                                  color='link'
-                                >
-                                  <i className='lnr-menu-circle btn-icon-wrapper' />
-                                </DropdownToggle>
-                                <DropdownMenu className='rm-pointers dropdown-menu-hover-link'>
-                                  <DropdownItem header>Header</DropdownItem>
-                                  <DropdownItem>
-                                    <i className='dropdown-icon lnr-inbox'> </i>
-                                    <span>Menus</span>
-                                  </DropdownItem>
-                                  <DropdownItem>
-                                    <i className='dropdown-icon lnr-file-empty'>
-                                      {' '}
-                                    </i>
-                                    <span>Settings</span>
-                                  </DropdownItem>
-                                  <DropdownItem>
-                                    <i className='dropdown-icon lnr-book'> </i>
-                                    <span>Actions</span>
-                                  </DropdownItem>
-                                  <DropdownItem divider />
-                                  <DropdownItem>
-                                    <i className='dropdown-icon lnr-picture'>
-                                      {' '}
-                                    </i>
-                                    <span>Dividers</span>
-                                  </DropdownItem>
-                                </DropdownMenu>
-                              </UncontrolledButtonDropdown>
+                            <div>
+                              <Button
+                                className='mb-2 mr-2 btn-icon btn-icon-only'
+                                color='warning'
+                                onClick={this.editCategory.bind(
+                                  this,
+                                  row.original
+                                )}
+                              >
+                                <i className='lnr-pencil btn-icon-wrapper'> </i>
+                              </Button>
+                              <Button
+                                className='mb-2 mr-2 btn-icon btn-icon-only'
+                                color='danger'
+                              >
+                                <i className='pe-7s-trash btn-icon-wrapper'>
+                                  {' '}
+                                </i>
+                              </Button>
                             </div>
                           ),
                         },
