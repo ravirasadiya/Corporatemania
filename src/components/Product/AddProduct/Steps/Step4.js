@@ -16,7 +16,7 @@ export default class WizardStep4 extends React.Component {
                             <div className="sa-placeholder"/>
                             <div className="sa-fix"/>
                         </div>
-                        <div className="results-subtitle mt-4">Finished!</div>
+                        <div className="results-subtitle mt-4">Images</div>
                         <div className="results-title">You arrived at the last form wizard step!</div>
                         <div className="mt-3 mb-3"/>
                         <div className="text-center">
